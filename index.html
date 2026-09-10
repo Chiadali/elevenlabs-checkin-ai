@@ -1,0 +1,695 @@
+<title>Il Portiere Notturno</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root{
+    --bg:#0f1420;
+    --bg-elevated:#161c2b;
+    --bg-card:#1b2233;
+    --line:rgba(255,255,255,0.09);
+    --line-strong:rgba(255,255,255,0.16);
+    --text:#eef1f6;
+    --text-muted:#98a1b5;
+    --amber:#e8963c;
+    --amber-strong:#f2b25c;
+    --amber-soft:rgba(232,150,60,0.16);
+    --brick:#cf7757;
+    --good:#6fbf8f;
+    --guest-bubble:#242c3f;
+    --marco-bubble:#3a2c1c;
+    --shadow:0 20px 50px -25px rgba(0,0,0,0.6);
+  }
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){
+      --bg:#eef1f5;
+      --bg-elevated:#ffffff;
+      --bg-card:#ffffff;
+      --line:rgba(23,27,38,0.12);
+      --line-strong:rgba(23,27,38,0.22);
+      --text:#171b26;
+      --text-muted:#5b6478;
+      --amber:#b5661f;
+      --amber-strong:#96521a;
+      --amber-soft:rgba(181,102,31,0.12);
+      --brick:#a04a34;
+      --good:#2f8f5b;
+      --guest-bubble:#e7eaf1;
+      --marco-bubble:#f6e9d9;
+      --shadow:0 20px 50px -30px rgba(23,27,38,0.25);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#eef1f5;
+    --bg-elevated:#ffffff;
+    --bg-card:#ffffff;
+    --line:rgba(23,27,38,0.12);
+    --line-strong:rgba(23,27,38,0.22);
+    --text:#171b26;
+    --text-muted:#5b6478;
+    --amber:#b5661f;
+    --amber-strong:#96521a;
+    --amber-soft:rgba(181,102,31,0.12);
+    --brick:#a04a34;
+    --good:#2f8f5b;
+    --guest-bubble:#e7eaf1;
+    --marco-bubble:#f6e9d9;
+    --shadow:0 20px 50px -30px rgba(23,27,38,0.25);
+  }
+  :root[data-theme="dark"]{
+    --bg:#0f1420;
+    --bg-elevated:#161c2b;
+    --bg-card:#1b2233;
+    --line:rgba(255,255,255,0.09);
+    --line-strong:rgba(255,255,255,0.16);
+    --text:#eef1f6;
+    --text-muted:#98a1b5;
+    --amber:#e8963c;
+    --amber-strong:#f2b25c;
+    --amber-soft:rgba(232,150,60,0.16);
+    --brick:#cf7757;
+    --good:#6fbf8f;
+    --guest-bubble:#242c3f;
+    --marco-bubble:#3a2c1c;
+    --shadow:0 20px 50px -25px rgba(0,0,0,0.6);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    padding:0 20px;
+    line-height:1.55;
+  }
+  .page{
+    max-width:920px;
+    margin:0 auto;
+    padding-block:56px 80px;
+    display:flex;
+    flex-direction:column;
+    gap:96px;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', Georgia, serif;
+    text-wrap:balance;
+    margin:0;
+  }
+  p{margin:0;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--amber);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:16px;
+    height:1px;
+    background:var(--amber);
+    display:inline-block;
+  }
+  code, .mono{ font-family:'IBM Plex Mono', monospace; font-variant-numeric: tabular-nums; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:36px;
+    align-items:center;
+    padding-top:8px;
+  }
+  .call-card{
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    box-shadow:var(--shadow);
+  }
+  .call-status{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    color:var(--text-muted);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+  }
+  .live-dot{
+    width:7px;height:7px;border-radius:50%;
+    background:var(--amber);
+    animation:pulse 1.6s ease-in-out infinite;
+    flex:none;
+  }
+  @media (prefers-reduced-motion: reduce){ .live-dot{animation:none;} }
+  @keyframes pulse{
+    0%,100%{ box-shadow:0 0 0 0 var(--amber-soft); }
+    50%{ box-shadow:0 0 0 6px transparent; }
+  }
+  canvas#wave{ width:100%; height:52px; display:block; }
+  .call-meta{ display:flex; flex-direction:column; gap:2px; }
+  .call-meta .name{ font-weight:600; font-size:0.95rem; }
+  .call-meta .sub{ font-size:0.78rem; color:var(--text-muted); }
+  .call-timer{ font-family:'IBM Plex Mono', monospace; font-size:0.85rem; color:var(--amber); }
+
+  .hero-copy{ display:flex; flex-direction:column; gap:18px; }
+  .hero-copy h1{ font-size:clamp(2.1rem, 5vw, 3.1rem); font-weight:600; line-height:1.08; }
+  .hero-copy h1 em{ font-style:italic; color:var(--amber); font-weight:500; }
+  .hero-copy .lede{ font-size:1.05rem; color:var(--text-muted); max-width:52ch; }
+  .badge-row{ display:flex; flex-wrap:wrap; gap:8px; margin-top:4px; }
+  .badge{
+    font-size:0.76rem;
+    padding:6px 12px;
+    border-radius:999px;
+    border:1px solid var(--line-strong);
+    color:var(--text-muted);
+  }
+
+  @media (max-width:680px){
+    .hero{ grid-template-columns:1fr; }
+    .call-card{ max-width:280px; }
+  }
+
+  /* ---------- Section shell ---------- */
+  section{ display:flex; flex-direction:column; gap:22px; }
+  .section-head{ display:flex; flex-direction:column; gap:10px; }
+  .section-head h2{ font-size:1.7rem; font-weight:600; }
+  .section-head p{ color:var(--text-muted); max-width:60ch; font-size:0.98rem; }
+
+  /* ---------- Problema ---------- */
+  .problem-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:14px;
+    overflow:hidden;
+  }
+  .problem-cell{
+    background:var(--bg-elevated);
+    padding:26px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .problem-cell .tag{ font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--brick); font-weight:600; }
+  .problem-cell p{ font-size:0.95rem; }
+  @media (max-width:600px){ .problem-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- Persona ---------- */
+  .persona-card{
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:28px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+  }
+  @media (max-width:680px){ .persona-card{ grid-template-columns:1fr; } }
+  .persona-id{ display:flex; flex-direction:column; gap:14px; }
+  .persona-id h3{ font-size:1.3rem; font-weight:600; }
+  .persona-id .role{ color:var(--text-muted); font-size:0.9rem; }
+  .tag-row{ display:flex; flex-wrap:wrap; gap:8px; }
+  .tag-pill{
+    font-size:0.78rem;
+    padding:5px 11px;
+    border-radius:999px;
+    background:var(--amber-soft);
+    color:var(--amber-strong);
+    font-weight:600;
+  }
+  .rule-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; }
+  .rule-list li{
+    font-size:0.88rem;
+    color:var(--text-muted);
+    padding-left:16px;
+    position:relative;
+  }
+  .rule-list li::before{
+    content:'—';
+    position:absolute; left:0; color:var(--amber);
+  }
+
+  .console{ display:flex; flex-direction:column; gap:16px; }
+  .console-row{ display:flex; flex-direction:column; gap:6px; }
+  .console-row .label-line{ display:flex; justify-content:space-between; font-size:0.82rem; }
+  .console-row .label-line span:first-child{ color:var(--text-muted); }
+  .console-row .label-line span:last-child{ font-family:'IBM Plex Mono', monospace; color:var(--amber); }
+  .console-row input[type=range]{
+    -webkit-appearance:none;
+    width:100%;
+    height:4px;
+    border-radius:999px;
+    background:var(--line-strong);
+    outline:none;
+  }
+  .console-row input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    width:15px;height:15px;border-radius:50%;
+    background:var(--amber);
+    border:2px solid var(--bg-elevated);
+    box-shadow:0 0 0 1px var(--amber);
+    cursor:pointer;
+  }
+  .console-row input[type=range]::-moz-range-thumb{
+    width:15px;height:15px;border-radius:50%;
+    background:var(--amber);
+    border:2px solid var(--bg-elevated);
+    box-shadow:0 0 0 1px var(--amber);
+    cursor:pointer;
+  }
+  .console-toggle{
+    display:flex; align-items:center; justify-content:space-between;
+    font-size:0.82rem;
+  }
+  .console-toggle span:first-child{ color:var(--text-muted); }
+  .toggle-pill{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--good);
+    font-size:0.78rem;
+    font-weight:600;
+  }
+  .toggle-pill::before{
+    content:'';
+    width:8px; height:8px; border-radius:50%;
+    background:var(--good);
+  }
+
+  /* ---------- Steps ---------- */
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:14px;
+  }
+  @media (max-width:820px){ .steps{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:480px){ .steps{ grid-template-columns:1fr; } }
+  .step-card{
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    min-height:100%;
+  }
+  .step-num{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--amber);
+    font-size:0.78rem;
+    letter-spacing:0.06em;
+  }
+  .step-card h4{ margin:0; font-size:1rem; font-family:'Public Sans', sans-serif; font-weight:700; }
+  .step-card p{ font-size:0.85rem; color:var(--text-muted); flex:1; }
+  .code-chip{
+    align-self:flex-start;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.92rem;
+    font-weight:600;
+    letter-spacing:0.03em;
+    padding:6px 12px;
+    border-radius:8px;
+    background:var(--amber-soft);
+    color:var(--amber-strong);
+  }
+  .no-code{
+    align-self:flex-start;
+    font-size:0.78rem;
+    color:var(--text-muted);
+    font-style:italic;
+  }
+
+  /* ---------- Phone / demo ---------- */
+  .demo-wrap{ display:flex; flex-direction:column; align-items:center; gap:18px; }
+  .lang-toggle{
+    display:inline-flex;
+    border:1px solid var(--line-strong);
+    border-radius:999px;
+    padding:3px;
+    gap:2px;
+  }
+  .lang-toggle button{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    font-weight:600;
+    border:none;
+    background:transparent;
+    color:var(--text-muted);
+    padding:7px 16px;
+    border-radius:999px;
+    cursor:pointer;
+  }
+  .lang-toggle button.active{
+    background:var(--amber);
+    color:#1b1206;
+  }
+  .lang-toggle button:focus-visible{ outline:2px solid var(--amber); outline-offset:2px; }
+
+  .phone{
+    width:100%;
+    max-width:380px;
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-radius:24px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .phone-head{
+    padding:16px 20px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .phone-head .who{ font-weight:600; font-size:0.95rem; }
+  .phone-head .where{ font-size:0.78rem; color:var(--text-muted); }
+  .transcript{
+    padding:18px 16px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    max-height:420px;
+    overflow-y:auto;
+  }
+  .bubble{
+    max-width:82%;
+    padding:9px 13px;
+    border-radius:14px;
+    font-size:0.88rem;
+    line-height:1.4;
+  }
+  .bubble.marco{
+    background:var(--marco-bubble);
+    align-self:flex-start;
+    border-bottom-left-radius:4px;
+  }
+  .bubble.guest{
+    background:var(--guest-bubble);
+    align-self:flex-end;
+    border-bottom-right-radius:4px;
+  }
+  .bubble .who-tag{
+    display:block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.62rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--text-muted);
+    margin-bottom:3px;
+  }
+
+  /* ---------- Footer / pitch ---------- */
+  .pitch{
+    background:var(--bg-elevated);
+    border:1px solid var(--line-strong);
+    border-radius:16px;
+    padding:30px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .pitch .eyebrow{ color:var(--brick); }
+  .pitch .eyebrow::before{ background:var(--brick); }
+  .pitch h2{ font-size:1.5rem; font-weight:600; }
+  .pitch p{ color:var(--text-muted); font-size:0.95rem; max-width:62ch; }
+  .pitch .line{ font-family:'IBM Plex Mono', monospace; font-size:0.85rem; color:var(--text); background:var(--bg-card); border:1px solid var(--line); padding:12px 14px; border-radius:10px; }
+
+  footer.credit{
+    text-align:center;
+    font-size:0.78rem;
+    color:var(--text-muted);
+  }
+</style>
+
+<div class="page">
+
+  <section class="hero">
+    <div class="call-card">
+      <div class="call-status"><span class="live-dot"></span> chiamata in arrivo</div>
+      <canvas id="wave" width="220" height="52" aria-hidden="true"></canvas>
+      <div class="call-meta">
+        <span class="name">Marco</span>
+        <span class="sub">Assistente notturno · Appartamenti Brera</span>
+      </div>
+      <div class="call-timer mono" id="timer">00:00</div>
+    </div>
+    <div class="hero-copy">
+      <p class="eyebrow">Concept per hackathon · ElevenLabs Conversational AI</p>
+      <h1>Alle due di notte, qualcuno <em>deve</em> rispondere.</h1>
+      <p class="lede">Marco è la voce che accoglie gli ospiti di Appartamenti Brera Milano quando arrivano tardi, stanchi e da soli davanti a un portone sconosciuto — un passo alla volta, in qualsiasi lingua parlino.</p>
+      <div class="badge-row">
+        <span class="badge">Self check-in vocale</span>
+        <span class="badge">Voce calda, non robotica</span>
+        <span class="badge">Multilingua automatico</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="problem">
+    <div class="section-head">
+      <p class="eyebrow">Il problema</p>
+      <h2>Il momento più fragile del soggiorno non ha personale.</h2>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-cell">
+        <span class="tag">L'ospite</span>
+        <p>Arriva di notte, magari in una via rumorosa o buia, con la valigia in mano e la batteria del telefono quasi scarica. È stanco. Un po' ansioso. Non conosce il palazzo.</p>
+      </div>
+      <div class="problem-cell">
+        <span class="tag">Il gestore</span>
+        <p>Non può essere sveglio ogni notte per aprire un portone. Ma un messaggio scritto, freddo, con quattro codici in fila, non rassicura nessuno alle due del mattino.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="persona">
+    <div class="section-head">
+      <p class="eyebrow">La soluzione</p>
+      <h2>Chi è Marco</h2>
+      <p>Non un menu vocale. Un'identità precisa, scritta come un system prompt, pensata per restare calma quando l'ospite non lo è.</p>
+    </div>
+    <div class="persona-card">
+      <div class="persona-id">
+        <div>
+          <h3>Marco</h3>
+          <p class="role">Assistente vocale · Appartamenti Brera Milano</p>
+        </div>
+        <div class="tag-row">
+          <span class="tag-pill">Calmo</span>
+          <span class="tag-pill">Rassicurante</span>
+          <span class="tag-pill">Professionale</span>
+          <span class="tag-pill">Accogliente</span>
+        </div>
+        <ul class="rule-list">
+          <li>Saluta l'ospite per nome quando possibile</li>
+          <li>Procede un passo alla volta, mai tutti i codici insieme</li>
+          <li>Aspetta un "ok, sono dentro" prima di continuare</li>
+          <li>Parla lentamente: frasi brevi, tono basso</li>
+        </ul>
+      </div>
+      <div class="console">
+        <div class="console-row">
+          <div class="label-line"><span>Stability</span><span>76%</span></div>
+          <input type="range" min="0" max="100" value="76" aria-label="Stability della voce, 76 per cento" disabled>
+        </div>
+        <div class="console-row">
+          <div class="label-line"><span>Style exaggeration</span><span>35%</span></div>
+          <input type="range" min="0" max="100" value="35" aria-label="Style exaggeration, 35 per cento" disabled>
+        </div>
+        <div class="console-toggle">
+          <span>Interruption sensitivity</span>
+          <span class="toggle-pill">attiva</span>
+        </div>
+        <div class="console-toggle">
+          <span>Voce</span>
+          <span class="mono" style="color:var(--text-muted); font-size:0.8rem;">timbro IT caldo — es. "Giovanni"</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="steps-section">
+    <div class="section-head">
+      <p class="eyebrow">La conoscenza di base</p>
+      <h2>Quattro tappe, un codice alla volta</h2>
+      <p>Marco non elenca mai tutto insieme. Ma questa è la sequenza che tiene in testa, dal portone al Wi-Fi.</p>
+    </div>
+    <div class="steps">
+      <div class="step-card">
+        <span class="step-num">01 — Portone</span>
+        <h4>Civico 10</h4>
+        <p>Tastierino numerico a sinistra del portone.</p>
+        <span class="code-chip">1234 #</span>
+      </div>
+      <div class="step-card">
+        <span class="step-num">02 — Ascensore</span>
+        <h4>3° piano, porta a destra</h4>
+        <p>In fondo al cortile, oltre l'ingresso.</p>
+        <span class="no-code">nessun codice</span>
+      </div>
+      <div class="step-card">
+        <span class="step-num">03 — Lockbox</span>
+        <h4>Sulla maniglia</h4>
+        <p>La chiave è dentro, attaccata alla porta dell'appartamento.</p>
+        <span class="code-chip">5678</span>
+      </div>
+      <div class="step-card">
+        <span class="step-num">04 — Wi-Fi</span>
+        <h4>Brera_Guest</h4>
+        <p>Rete disponibile in tutto l'appartamento.</p>
+        <span class="code-chip">Milano2026</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo">
+    <div class="section-head">
+      <p class="eyebrow">La killer feature</p>
+      <h2>Stessa calma, qualunque lingua arrivi al telefono</h2>
+      <p>Il sistema riconosce automaticamente la lingua dell'ospite. Stesso Marco, stessa sequenza, stessa rassicurazione — in italiano o in inglese.</p>
+    </div>
+    <div class="demo-wrap">
+      <div class="lang-toggle" role="group" aria-label="Lingua della conversazione">
+        <button type="button" class="active" data-lang="it">Italiano</button>
+        <button type="button" data-lang="en">English</button>
+      </div>
+      <div class="phone">
+        <div class="phone-head">
+          <span class="who">Marco</span>
+          <span class="where">Appartamenti Brera Milano · in linea</span>
+        </div>
+        <div class="transcript" id="transcript"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pitch">
+    <p class="eyebrow">Prossimo passo</p>
+    <h2>Pronto per il kickoff</h2>
+    <p>Il concept e il system prompt sono già pronti. Manca solo un compagno di team che sappia configurare Vapi.ai o la dashboard di ElevenLabs Conversational AI per collegare voce e logica.</p>
+    <div class="line">"Ho già il concept e il prompt pronto per un assistente al check-in notturno per B&amp;B — dobbiamo solo configurare la voce e testare la logica."</div>
+  </section>
+
+  <footer class="credit">Concept · Appartamenti Brera Milano × ElevenLabs Conversational AI</footer>
+
+</div>
+
+<script>
+(function(){
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Waveform
+  var canvas = document.getElementById('wave');
+  var ctx = canvas.getContext('2d');
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  function sizeCanvas(){
+    var rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  sizeCanvas();
+  window.addEventListener('resize', sizeCanvas);
+
+  var amber = getComputedStyle(document.documentElement).getPropertyValue('--amber').trim() || '#e8963c';
+  var bars = 28;
+  var phase = 0;
+
+  function drawBars(t){
+    var rect = canvas.getBoundingClientRect();
+    var w = rect.width, h = rect.height;
+    ctx.clearRect(0,0,w,h);
+    var gap = 3;
+    var barW = (w - gap*(bars-1)) / bars;
+    for(var i=0;i<bars;i++){
+      var seed = Math.sin(i*0.7 + t*0.0022) * 0.5 + Math.sin(i*1.3 - t*0.0016) * 0.35;
+      var amp = reduceMotion ? Math.sin(i*0.6)*0.5 : seed;
+      var bh = Math.max(3, (0.18 + Math.abs(amp)*0.82) * h);
+      var x = i*(barW+gap);
+      var y = (h-bh)/2;
+      ctx.fillStyle = amber;
+      ctx.globalAlpha = 0.35 + Math.abs(amp)*0.65;
+      ctx.fillRect(x, y, barW, bh);
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  if(reduceMotion){
+    drawBars(0);
+  } else {
+    function loop(t){
+      drawBars(t);
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  }
+
+  // Call timer
+  var timerEl = document.getElementById('timer');
+  var seconds = 47;
+  setInterval(function(){
+    seconds++;
+    var m = Math.floor(seconds/60);
+    var s = seconds%60;
+    timerEl.textContent = (m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+  }, 1000);
+
+  // Transcript data
+  var script = {
+    it: [
+      ['marco','Buonasera! Sono Marco, ti aiuto io a entrare. Sei già davanti al portone o ti serve una mano per trovarci?'],
+      ['guest','Ciao, sono davanti al portone del civico 10.'],
+      ['marco','Perfetto. Il tastierino è a sinistra del portone: digita 1234 e poi il cancelletto. Fammi sapere quando sei dentro.'],
+      ['guest','Ok, sono dentro.'],
+      ['marco','Bene. L’ascensore è in fondo al cortile: sali al terzo piano, la porta è a destra.'],
+      ['guest','Sono davanti alla porta.'],
+      ['marco','La chiave è nella lockbox attaccata alla maniglia. Il codice è 5678. Il Wi-Fi si chiama Brera_Guest, password Milano2026. Buona notte, e benvenuto a Milano.']
+    ],
+    en: [
+      ['marco','Good evening! I’m Marco, I’ll help you get in. Are you already outside the main door, or do you need directions to find us?'],
+      ['guest','Hi, I’m at the door, number 10.'],
+      ['marco','Perfect. The keypad is on the left of the door: type 1234, then the pound key. Let me know once you’re inside.'],
+      ['guest','Okay, I’m in.'],
+      ['marco','Great. The elevator is at the back of the courtyard: go up to the third floor, the door is on your right.'],
+      ['guest','I’m at the door now.'],
+      ['marco','The key is in the lockbox on the handle. The code is 5678. The Wi-Fi is called Brera_Guest, password Milano2026. Good night, and welcome to Milan.']
+    ]
+  };
+
+  var transcript = document.getElementById('transcript');
+  function render(lang){
+    transcript.innerHTML = '';
+    script[lang].forEach(function(line){
+      var div = document.createElement('div');
+      div.className = 'bubble ' + line[0];
+      var tag = document.createElement('span');
+      tag.className = 'who-tag';
+      tag.textContent = line[0] === 'marco' ? 'Marco' : (lang==='it' ? 'Ospite' : 'Guest');
+      div.appendChild(tag);
+      div.appendChild(document.createTextNode(line[1]));
+      transcript.appendChild(div);
+    });
+  }
+  render('it');
+
+  var buttons = document.querySelectorAll('.lang-toggle button');
+  buttons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      buttons.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      render(btn.getAttribute('data-lang'));
+    });
+  });
+})();
+</script>
