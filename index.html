@@ -296,6 +296,8 @@
   .demo-wrap{ display:flex; flex-direction:column; align-items:center; gap:18px; }
   .lang-toggle{
     display:inline-flex;
+    flex-wrap:wrap;
+    justify-content:center;
     border:1px solid var(--line-strong);
     border-radius:999px;
     padding:3px;
@@ -308,7 +310,7 @@
     border:none;
     background:transparent;
     color:var(--text-muted);
-    padding:7px 16px;
+    padding:7px 14px;
     border-radius:999px;
     cursor:pointer;
   }
@@ -491,12 +493,15 @@
     <div class="section-head">
       <p class="eyebrow"><svg class="icon-plane" viewBox="0 0 24 24" aria-hidden="true"><path d="M21,16V14L13,9V3.5C13,2.67 12.33,2 11.5,2C10.67,2 10,2.67 10,3.5V9L2,14V16L10,13.5V19L7.5,20.5V22L11.5,21L15.5,22V20.5L13,19V13.5L21,16Z"/></svg>La killer feature</p>
       <h2>Stessa calma, qualunque lingua arrivi al telefono</h2>
-      <p>Il sistema riconosce automaticamente la lingua dell'ospite. Stesso Marco, stessa sequenza, stessa rassicurazione — in italiano o in inglese.</p>
+      <p>Il sistema riconosce automaticamente la lingua dell'ospite. Stesso Marco, stessa sequenza, stessa rassicurazione — in italiano, inglese, spagnolo, tedesco o francese.</p>
     </div>
     <div class="demo-wrap">
       <div class="lang-toggle" role="group" aria-label="Lingua della conversazione">
         <button type="button" class="active" data-lang="it">Italiano</button>
         <button type="button" data-lang="en">English</button>
+        <button type="button" data-lang="es">Español</button>
+        <button type="button" data-lang="de">Deutsch</button>
+        <button type="button" data-lang="fr">Français</button>
       </div>
       <div class="phone">
         <div class="phone-head">
@@ -590,8 +595,37 @@
       ['marco','Great. The elevator is at the back of the courtyard: go up to the third floor, the door is on your right.'],
       ['guest','I’m at the door now.'],
       ['marco','The key is in the lockbox on the handle. The code is 5678. The Wi-Fi is called Brera_Guest, password Milano2026. Good night, and welcome to Milan.']
+    ],
+    es: [
+      ['marco','¡Buenas noches! Soy Marco, te ayudo a entrar. ¿Ya estás frente al portón o necesitas indicaciones para encontrarnos?'],
+      ['guest','Hola, estoy frente al portón, número 10.'],
+      ['marco','Perfecto. El teclado está a la izquierda de la puerta: marca 1234 y luego la almohadilla. Avísame cuando estés dentro.'],
+      ['guest','Vale, ya estoy dentro.'],
+      ['marco','Muy bien. El ascensor está al fondo del patio: sube al tercer piso, la puerta está a la derecha.'],
+      ['guest','Estoy frente a la puerta.'],
+      ['marco','La llave está en la caja de seguridad pegada al pomo. El código es 5678. El Wi-Fi se llama Brera_Guest, contraseña Milano2026. Buenas noches, y bienvenido a Milán.']
+    ],
+    de: [
+      ['marco','Guten Abend! Ich bin Marco und helfe dir beim Reinkommen. Stehst du schon vor der Tür, oder brauchst du eine Wegbeschreibung?'],
+      ['guest','Hallo, ich stehe vor der Tür, Hausnummer 10.'],
+      ['marco','Perfekt. Das Tastenfeld ist links neben der Tür: gib 1234 ein und dann die Raute-Taste. Sag mir Bescheid, wenn du drinnen bist.'],
+      ['guest','Okay, ich bin drin.'],
+      ['marco','Gut. Der Aufzug ist hinten im Hof: fahr in den dritten Stock, die Tür ist rechts.'],
+      ['guest','Ich stehe vor der Tür.'],
+      ['marco','Der Schlüssel ist in der Lockbox am Türgriff. Der Code lautet 5678. Das WLAN heißt Brera_Guest, Passwort Milano2026. Gute Nacht, und willkommen in Mailand.']
+    ],
+    fr: [
+      ['marco','Bonsoir ! Je suis Marco, je vais vous aider à entrer. Êtes-vous déjà devant le portail ou avez-vous besoin d’indications pour nous trouver ?'],
+      ['guest','Bonjour, je suis devant le portail, au numéro 10.'],
+      ['marco','Parfait. Le clavier se trouve à gauche du portail : tapez 1234 puis la touche dièse. Dites-moi quand vous serez à l’intérieur.'],
+      ['guest','D’accord, je suis à l’intérieur.'],
+      ['marco','Très bien. L’ascenseur est au fond de la cour : montez au troisième étage, la porte est à droite.'],
+      ['guest','Je suis devant la porte.'],
+      ['marco','La clé se trouve dans la lockbox fixée à la poignée. Le code est 5678. Le Wi-Fi s’appelle Brera_Guest, mot de passe Milano2026. Bonne nuit, et bienvenue à Milan.']
     ]
   };
+
+  var guestLabel = { it:'Ospite', en:'Guest', es:'Huésped', de:'Gast', fr:'Client' };
 
   var transcript = document.getElementById('transcript');
   function render(lang){
@@ -601,7 +635,7 @@
       div.className = 'bubble ' + line[0];
       var tag = document.createElement('span');
       tag.className = 'who-tag';
-      tag.textContent = line[0] === 'marco' ? 'Marco' : (lang==='it' ? 'Ospite' : 'Guest');
+      tag.textContent = line[0] === 'marco' ? 'Marco' : guestLabel[lang];
       div.appendChild(tag);
       div.appendChild(document.createTextNode(line[1]));
       transcript.appendChild(div);
