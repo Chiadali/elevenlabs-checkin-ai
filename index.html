@@ -1,76 +1,68 @@
 <title>Il Portiere Notturno</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Montserrat:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
 <style>
   :root{
-    --bg:#0f1420;
-    --bg-elevated:#161c2b;
-    --bg-card:#1b2233;
-    --line:rgba(255,255,255,0.09);
-    --line-strong:rgba(255,255,255,0.16);
-    --text:#eef1f6;
-    --text-muted:#98a1b5;
-    --amber:#e8963c;
-    --amber-strong:#f2b25c;
-    --amber-soft:rgba(232,150,60,0.16);
-    --brick:#cf7757;
+    --bg:#150f24;
+    --bg-elevated:#1c1533;
+    --bg-card:#221a3d;
+    --line:rgba(255,255,255,0.10);
+    --line-strong:rgba(255,255,255,0.20);
+    --text:#f2effa;
+    --text-muted:#a79ec2;
+    --accent:#9b7cf0;
+    --accent-strong:#c3aef8;
+    --accent-soft:rgba(155,124,240,0.16);
     --good:#6fbf8f;
-    --guest-bubble:#242c3f;
-    --marco-bubble:#3a2c1c;
-    --shadow:0 20px 50px -25px rgba(0,0,0,0.6);
+    --guest-bubble:#241c3c;
+    --marco-bubble:#3b2b63;
   }
   @media (prefers-color-scheme: light){
     :root:not([data-theme="dark"]){
-      --bg:#eef1f5;
+      --bg:#f3f0fa;
       --bg-elevated:#ffffff;
-      --bg-card:#ffffff;
-      --line:rgba(23,27,38,0.12);
-      --line-strong:rgba(23,27,38,0.22);
-      --text:#171b26;
-      --text-muted:#5b6478;
-      --amber:#b5661f;
-      --amber-strong:#96521a;
-      --amber-soft:rgba(181,102,31,0.12);
-      --brick:#a04a34;
+      --bg-card:#faf8ff;
+      --line:rgba(29,21,51,0.14);
+      --line-strong:rgba(29,21,51,0.26);
+      --text:#1d1533;
+      --text-muted:#675e82;
+      --accent:#6d28d9;
+      --accent-strong:#551fb0;
+      --accent-soft:rgba(109,40,217,0.10);
       --good:#2f8f5b;
-      --guest-bubble:#e7eaf1;
-      --marco-bubble:#f6e9d9;
-      --shadow:0 20px 50px -30px rgba(23,27,38,0.25);
+      --guest-bubble:#ece7f7;
+      --marco-bubble:#e2d4fa;
     }
   }
   :root[data-theme="light"]{
-    --bg:#eef1f5;
+    --bg:#f3f0fa;
     --bg-elevated:#ffffff;
-    --bg-card:#ffffff;
-    --line:rgba(23,27,38,0.12);
-    --line-strong:rgba(23,27,38,0.22);
-    --text:#171b26;
-    --text-muted:#5b6478;
-    --amber:#b5661f;
-    --amber-strong:#96521a;
-    --amber-soft:rgba(181,102,31,0.12);
-    --brick:#a04a34;
+    --bg-card:#faf8ff;
+    --line:rgba(29,21,51,0.14);
+    --line-strong:rgba(29,21,51,0.26);
+    --text:#1d1533;
+    --text-muted:#675e82;
+    --accent:#6d28d9;
+    --accent-strong:#551fb0;
+    --accent-soft:rgba(109,40,217,0.10);
     --good:#2f8f5b;
-    --guest-bubble:#e7eaf1;
-    --marco-bubble:#f6e9d9;
-    --shadow:0 20px 50px -30px rgba(23,27,38,0.25);
+    --guest-bubble:#ece7f7;
+    --marco-bubble:#e2d4fa;
   }
   :root[data-theme="dark"]{
-    --bg:#0f1420;
-    --bg-elevated:#161c2b;
-    --bg-card:#1b2233;
-    --line:rgba(255,255,255,0.09);
-    --line-strong:rgba(255,255,255,0.16);
-    --text:#eef1f6;
-    --text-muted:#98a1b5;
-    --amber:#e8963c;
-    --amber-strong:#f2b25c;
-    --amber-soft:rgba(232,150,60,0.16);
-    --brick:#cf7757;
+    --bg:#150f24;
+    --bg-elevated:#1c1533;
+    --bg-card:#221a3d;
+    --line:rgba(255,255,255,0.10);
+    --line-strong:rgba(255,255,255,0.20);
+    --text:#f2effa;
+    --text-muted:#a79ec2;
+    --accent:#9b7cf0;
+    --accent-strong:#c3aef8;
+    --accent-soft:rgba(155,124,240,0.16);
     --good:#6fbf8f;
-    --guest-bubble:#242c3f;
-    --marco-bubble:#3a2c1c;
-    --shadow:0 20px 50px -25px rgba(0,0,0,0.6);
+    --guest-bubble:#241c3c;
+    --marco-bubble:#3b2b63;
   }
 
   *{box-sizing:border-box;}
@@ -78,7 +70,7 @@
     margin:0;
     background:var(--bg);
     color:var(--text);
-    font-family:'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family:'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
     padding:0 20px;
     line-height:1.55;
   }
@@ -88,32 +80,35 @@
     padding-block:56px 80px;
     display:flex;
     flex-direction:column;
-    gap:96px;
+    gap:88px;
   }
   h1,h2,h3{
-    font-family:'Fraunces', Georgia, serif;
+    font-family:'Jost', sans-serif;
     text-wrap:balance;
     margin:0;
   }
   p{margin:0;}
+
+  .icon-plane{
+    width:12px;
+    height:12px;
+    flex:none;
+    fill:var(--accent);
+    transform:rotate(-25deg);
+  }
+
+  code, .mono{ font-family:'IBM Plex Mono', monospace; font-variant-numeric: tabular-nums; }
+
   .eyebrow{
     font-family:'IBM Plex Mono', monospace;
     font-size:0.72rem;
-    letter-spacing:0.14em;
+    letter-spacing:0.13em;
     text-transform:uppercase;
-    color:var(--amber);
+    color:var(--accent);
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:9px;
   }
-  .eyebrow::before{
-    content:'';
-    width:16px;
-    height:1px;
-    background:var(--amber);
-    display:inline-block;
-  }
-  code, .mono{ font-family:'IBM Plex Mono', monospace; font-variant-numeric: tabular-nums; }
 
   /* ---------- Hero ---------- */
   .hero{
@@ -125,51 +120,52 @@
   }
   .call-card{
     background:var(--bg-elevated);
-    border:1px solid var(--line);
-    border-radius:18px;
+    border:1px solid var(--line-strong);
+    border-radius:8px;
     padding:18px;
     display:flex;
     flex-direction:column;
     gap:14px;
-    box-shadow:var(--shadow);
   }
   .call-status{
     display:flex;
     align-items:center;
     gap:8px;
     font-family:'IBM Plex Mono', monospace;
-    font-size:0.7rem;
+    font-size:0.68rem;
     color:var(--text-muted);
     text-transform:uppercase;
     letter-spacing:0.08em;
   }
   .live-dot{
     width:7px;height:7px;border-radius:50%;
-    background:var(--amber);
+    background:var(--accent);
     animation:pulse 1.6s ease-in-out infinite;
     flex:none;
   }
   @media (prefers-reduced-motion: reduce){ .live-dot{animation:none;} }
   @keyframes pulse{
-    0%,100%{ box-shadow:0 0 0 0 var(--amber-soft); }
+    0%,100%{ box-shadow:0 0 0 0 var(--accent-soft); }
     50%{ box-shadow:0 0 0 6px transparent; }
   }
   canvas#wave{ width:100%; height:52px; display:block; }
   .call-meta{ display:flex; flex-direction:column; gap:2px; }
-  .call-meta .name{ font-weight:600; font-size:0.95rem; }
+  .call-meta .name{ font-weight:600; font-size:0.95rem; font-family:'Jost', sans-serif; }
   .call-meta .sub{ font-size:0.78rem; color:var(--text-muted); }
-  .call-timer{ font-family:'IBM Plex Mono', monospace; font-size:0.85rem; color:var(--amber); }
+  .call-timer{ font-family:'IBM Plex Mono', monospace; font-size:0.85rem; color:var(--accent); }
 
   .hero-copy{ display:flex; flex-direction:column; gap:18px; }
-  .hero-copy h1{ font-size:clamp(2.1rem, 5vw, 3.1rem); font-weight:600; line-height:1.08; }
-  .hero-copy h1 em{ font-style:italic; color:var(--amber); font-weight:500; }
+  .hero-copy h1{ font-size:clamp(2.1rem, 5vw, 3.1rem); font-weight:600; line-height:1.1; }
+  .hero-copy h1 em{ font-style:italic; font-weight:500; color:var(--accent); }
   .hero-copy .lede{ font-size:1.05rem; color:var(--text-muted); max-width:52ch; }
-  .badge-row{ display:flex; flex-wrap:wrap; gap:8px; margin-top:4px; }
-  .badge{
-    font-size:0.76rem;
-    padding:6px 12px;
-    border-radius:999px;
+  .tag-row-flat{ display:flex; flex-wrap:wrap; gap:8px; margin-top:4px; }
+  .flat-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.03em;
+    padding:6px 10px;
     border:1px solid var(--line-strong);
+    border-radius:4px;
     color:var(--text-muted);
   }
 
@@ -191,7 +187,7 @@
     gap:1px;
     background:var(--line);
     border:1px solid var(--line);
-    border-radius:14px;
+    border-radius:8px;
     overflow:hidden;
   }
   .problem-cell{
@@ -201,7 +197,7 @@
     flex-direction:column;
     gap:10px;
   }
-  .problem-cell .tag{ font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--brick); font-weight:600; }
+  .problem-cell .tag{ font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent); font-weight:600; font-family:'IBM Plex Mono', monospace; }
   .problem-cell p{ font-size:0.95rem; }
   @media (max-width:600px){ .problem-grid{ grid-template-columns:1fr; } }
 
@@ -209,7 +205,7 @@
   .persona-card{
     background:var(--bg-elevated);
     border:1px solid var(--line);
-    border-radius:16px;
+    border-radius:8px;
     padding:28px;
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -218,73 +214,39 @@
   @media (max-width:680px){ .persona-card{ grid-template-columns:1fr; } }
   .persona-id{ display:flex; flex-direction:column; gap:14px; }
   .persona-id h3{ font-size:1.3rem; font-weight:600; }
-  .persona-id .role{ color:var(--text-muted); font-size:0.9rem; }
+  .persona-id .role{ color:var(--text-muted); font-size:0.9rem; font-family:'IBM Plex Mono', monospace; }
   .tag-row{ display:flex; flex-wrap:wrap; gap:8px; }
   .tag-pill{
-    font-size:0.78rem;
-    padding:5px 11px;
-    border-radius:999px;
-    background:var(--amber-soft);
-    color:var(--amber-strong);
+    font-size:0.76rem;
+    padding:5px 10px;
+    border-radius:4px;
+    background:var(--accent-soft);
+    color:var(--accent-strong);
     font-weight:600;
   }
-  .rule-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; }
+  .rule-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px; }
   .rule-list li{
     font-size:0.88rem;
     color:var(--text-muted);
-    padding-left:16px;
-    position:relative;
+    display:flex;
+    align-items:flex-start;
+    gap:8px;
   }
-  .rule-list li::before{
-    content:'—';
-    position:absolute; left:0; color:var(--amber);
-  }
+  .rule-list li .icon-plane{ margin-top:4px; }
 
-  .console{ display:flex; flex-direction:column; gap:16px; }
-  .console-row{ display:flex; flex-direction:column; gap:6px; }
-  .console-row .label-line{ display:flex; justify-content:space-between; font-size:0.82rem; }
-  .console-row .label-line span:first-child{ color:var(--text-muted); }
-  .console-row .label-line span:last-child{ font-family:'IBM Plex Mono', monospace; color:var(--amber); }
-  .console-row input[type=range]{
-    -webkit-appearance:none;
-    width:100%;
-    height:4px;
-    border-radius:999px;
-    background:var(--line-strong);
-    outline:none;
+  .spec-list{ display:flex; flex-direction:column; }
+  .spec-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:12px;
+    padding:10px 0;
+    border-bottom:1px solid var(--line);
+    font-size:0.86rem;
   }
-  .console-row input[type=range]::-webkit-slider-thumb{
-    -webkit-appearance:none;
-    width:15px;height:15px;border-radius:50%;
-    background:var(--amber);
-    border:2px solid var(--bg-elevated);
-    box-shadow:0 0 0 1px var(--amber);
-    cursor:pointer;
-  }
-  .console-row input[type=range]::-moz-range-thumb{
-    width:15px;height:15px;border-radius:50%;
-    background:var(--amber);
-    border:2px solid var(--bg-elevated);
-    box-shadow:0 0 0 1px var(--amber);
-    cursor:pointer;
-  }
-  .console-toggle{
-    display:flex; align-items:center; justify-content:space-between;
-    font-size:0.82rem;
-  }
-  .console-toggle span:first-child{ color:var(--text-muted); }
-  .toggle-pill{
-    display:inline-flex; align-items:center; gap:6px;
-    font-family:'IBM Plex Mono', monospace;
-    color:var(--good);
-    font-size:0.78rem;
-    font-weight:600;
-  }
-  .toggle-pill::before{
-    content:'';
-    width:8px; height:8px; border-radius:50%;
-    background:var(--good);
-  }
+  .spec-row:last-child{ border-bottom:none; }
+  .spec-row .k{ color:var(--text-muted); }
+  .spec-row .v{ font-family:'IBM Plex Mono', monospace; color:var(--accent); text-align:right; }
 
   /* ---------- Steps ---------- */
   .steps{
@@ -297,7 +259,7 @@
   .step-card{
     background:var(--bg-elevated);
     border:1px solid var(--line);
-    border-radius:14px;
+    border-radius:8px;
     padding:20px;
     display:flex;
     flex-direction:column;
@@ -306,11 +268,11 @@
   }
   .step-num{
     font-family:'IBM Plex Mono', monospace;
-    color:var(--amber);
-    font-size:0.78rem;
-    letter-spacing:0.06em;
+    color:var(--accent);
+    font-size:0.76rem;
+    letter-spacing:0.05em;
   }
-  .step-card h4{ margin:0; font-size:1rem; font-family:'Public Sans', sans-serif; font-weight:700; }
+  .step-card h4{ margin:0; font-size:1rem; font-family:'Jost', sans-serif; font-weight:600; }
   .step-card p{ font-size:0.85rem; color:var(--text-muted); flex:1; }
   .code-chip{
     align-self:flex-start;
@@ -318,10 +280,10 @@
     font-size:0.92rem;
     font-weight:600;
     letter-spacing:0.03em;
-    padding:6px 12px;
-    border-radius:8px;
-    background:var(--amber-soft);
-    color:var(--amber-strong);
+    padding:6px 11px;
+    border-radius:5px;
+    background:var(--accent-soft);
+    color:var(--accent-strong);
   }
   .no-code{
     align-self:flex-start;
@@ -341,7 +303,7 @@
   }
   .lang-toggle button{
     font-family:'IBM Plex Mono', monospace;
-    font-size:0.78rem;
+    font-size:0.76rem;
     font-weight:600;
     border:none;
     background:transparent;
@@ -351,18 +313,17 @@
     cursor:pointer;
   }
   .lang-toggle button.active{
-    background:var(--amber);
-    color:#1b1206;
+    background:var(--accent);
+    color:#150f24;
   }
-  .lang-toggle button:focus-visible{ outline:2px solid var(--amber); outline-offset:2px; }
+  .lang-toggle button:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
 
   .phone{
     width:100%;
     max-width:380px;
     background:var(--bg-elevated);
-    border:1px solid var(--line);
-    border-radius:24px;
-    box-shadow:var(--shadow);
+    border:1px solid var(--line-strong);
+    border-radius:12px;
     overflow:hidden;
   }
   .phone-head{
@@ -372,7 +333,7 @@
     flex-direction:column;
     gap:2px;
   }
-  .phone-head .who{ font-weight:600; font-size:0.95rem; }
+  .phone-head .who{ font-weight:600; font-size:0.95rem; font-family:'Jost', sans-serif; }
   .phone-head .where{ font-size:0.78rem; color:var(--text-muted); }
   .transcript{
     padding:18px 16px;
@@ -385,19 +346,19 @@
   .bubble{
     max-width:82%;
     padding:9px 13px;
-    border-radius:14px;
+    border-radius:12px;
     font-size:0.88rem;
     line-height:1.4;
   }
   .bubble.marco{
     background:var(--marco-bubble);
     align-self:flex-start;
-    border-bottom-left-radius:4px;
+    border-bottom-left-radius:3px;
   }
   .bubble.guest{
     background:var(--guest-bubble);
     align-self:flex-end;
-    border-bottom-right-radius:4px;
+    border-bottom-right-radius:3px;
   }
   .bubble .who-tag{
     display:block;
@@ -413,17 +374,15 @@
   .pitch{
     background:var(--bg-elevated);
     border:1px solid var(--line-strong);
-    border-radius:16px;
+    border-radius:8px;
     padding:30px;
     display:flex;
     flex-direction:column;
     gap:14px;
   }
-  .pitch .eyebrow{ color:var(--brick); }
-  .pitch .eyebrow::before{ background:var(--brick); }
   .pitch h2{ font-size:1.5rem; font-weight:600; }
   .pitch p{ color:var(--text-muted); font-size:0.95rem; max-width:62ch; }
-  .pitch .line{ font-family:'IBM Plex Mono', monospace; font-size:0.85rem; color:var(--text); background:var(--bg-card); border:1px solid var(--line); padding:12px 14px; border-radius:10px; }
+  .pitch .line{ font-family:'IBM Plex Mono', monospace; font-size:0.85rem; color:var(--text); background:var(--bg-card); border:1px solid var(--line); padding:12px 14px; border-radius:6px; }
 
   footer.credit{
     text-align:center;
@@ -445,20 +404,20 @@
       <div class="call-timer mono" id="timer">00:00</div>
     </div>
     <div class="hero-copy">
-      <p class="eyebrow">Concept per hackathon · ElevenLabs Conversational AI</p>
+      <p class="eyebrow"><svg class="icon-plane" viewBox="0 0 24 24" aria-hidden="true"><path d="M21,16V14L13,9V3.5C13,2.67 12.33,2 11.5,2C10.67,2 10,2.67 10,3.5V9L2,14V16L10,13.5V19L7.5,20.5V22L11.5,21L15.5,22V20.5L13,19V13.5L21,16Z"/></svg>Concept per hackathon · ElevenLabs Conversational AI</p>
       <h1>Alle due di notte, qualcuno <em>deve</em> rispondere.</h1>
       <p class="lede">Marco è la voce che accoglie gli ospiti di Appartamenti Brera Milano quando arrivano tardi, stanchi e da soli davanti a un portone sconosciuto — un passo alla volta, in qualsiasi lingua parlino.</p>
-      <div class="badge-row">
-        <span class="badge">Self check-in vocale</span>
-        <span class="badge">Voce calda, non robotica</span>
-        <span class="badge">Multilingua automatico</span>
+      <div class="tag-row-flat">
+        <span class="flat-tag">SELF CHECK-IN VOCALE</span>
+        <span class="flat-tag">VOCE CALDA, NON ROBOTICA</span>
+        <span class="flat-tag">MULTILINGUA AUTOMATICO</span>
       </div>
     </div>
   </section>
 
   <section class="problem">
     <div class="section-head">
-      <p class="eyebrow">Il problema</p>
+      <p class="eyebrow"><svg class="icon-plane" viewBox="0 0 24 24" aria-hidden="true"><path d="M21,16V14L13,9V3.5C13,2.67 12.33,2 11.5,2C10.67,2 10,2.67 10,3.5V9L2,14V16L10,13.5V19L7.5,20.5V22L11.5,21L15.5,22V20.5L13,19V13.5L21,16Z"/></svg>Il problema</p>
       <h2>Il momento più fragile del soggiorno non ha personale.</h2>
     </div>
     <div class="problem-grid">
@@ -475,7 +434,7 @@
 
   <section class="persona">
     <div class="section-head">
-      <p class="eyebrow">La soluzione</p>
+      <p class="eyebrow"><svg class="icon-plane" viewBox="0 0 24 24" aria-hidden="true"><path d="M21,16V14L13,9V3.5C13,2.67 12.33,2 11.5,2C10.67,2 10,2.67 10,3.5V9L2,14V16L10,13.5V19L7.5,20.5V22L11.5,21L15.5,22V20.5L13,19V13.5L21,16Z"/></svg>La soluzione</p>
       <h2>Chi è Marco</h2>
       <p>Non un menu vocale. Un'identità precisa, scritta come un system prompt, pensata per restare calma quando l'ospite non lo è.</p>
     </div>
@@ -492,36 +451,24 @@
           <span class="tag-pill">Accogliente</span>
         </div>
         <ul class="rule-list">
-          <li>Saluta l'ospite per nome quando possibile</li>
-          <li>Procede un passo alla volta, mai tutti i codici insieme</li>
-          <li>Aspetta un "ok, sono dentro" prima di continuare</li>
-          <li>Parla lentamente: frasi brevi, tono basso</li>
+          <li><svg class="icon-plane" viewBox="0 0 24 24" aria-hidden="true"><path d="M21,16V14L13,9V3.5C13,2.67 12.33,2 11.5,2C10.67,2 10,2.67 10,3.5V9L2,14V16L10,13.5V19L7.5,20.5V22L11.5,21L15.5,22V20.5L13,19V13.5L21,16Z"/></svg><span>Saluta l'ospite per nome quando possibile</span></li>
+          <li><svg class="icon-plane" viewBox="0 0 24 24" aria-hidden="true"><path d="M21,16V14L13,9V3.5C13,2.67 12.33,2 11.5,2C10.67,2 10,2.67 10,3.5V9L2,14V16L10,13.5V19L7.5,20.5V22L11.5,21L15.5,22V20.5L13,19V13.5L21,16Z"/></svg><span>Procede un passo alla volta, mai tutti i codici insieme</span></li>
+          <li><svg class="icon-plane" viewBox="0 0 24 24" aria-hidden="true"><path d="M21,16V14L13,9V3.5C13,2.67 12.33,2 11.5,2C10.67,2 10,2.67 10,3.5V9L2,14V16L10,13.5V19L7.5,20.5V22L11.5,21L15.5,22V20.5L13,19V13.5L21,16Z"/></svg><span>Aspetta un "ok, sono dentro" prima di continuare</span></li>
+          <li><svg class="icon-plane" viewBox="0 0 24 24" aria-hidden="true"><path d="M21,16V14L13,9V3.5C13,2.67 12.33,2 11.5,2C10.67,2 10,2.67 10,3.5V9L2,14V16L10,13.5V19L7.5,20.5V22L11.5,21L15.5,22V20.5L13,19V13.5L21,16Z"/></svg><span>Parla lentamente: frasi brevi, tono basso</span></li>
         </ul>
       </div>
-      <div class="console">
-        <div class="console-row">
-          <div class="label-line"><span>Stability</span><span>76%</span></div>
-          <input type="range" min="0" max="100" value="76" aria-label="Stability della voce, 76 per cento" disabled>
-        </div>
-        <div class="console-row">
-          <div class="label-line"><span>Style exaggeration</span><span>35%</span></div>
-          <input type="range" min="0" max="100" value="35" aria-label="Style exaggeration, 35 per cento" disabled>
-        </div>
-        <div class="console-toggle">
-          <span>Interruption sensitivity</span>
-          <span class="toggle-pill">attiva</span>
-        </div>
-        <div class="console-toggle">
-          <span>Voce</span>
-          <span class="mono" style="color:var(--text-muted); font-size:0.8rem;">timbro IT caldo — es. "Giovanni"</span>
-        </div>
+      <div class="spec-list">
+        <div class="spec-row"><span class="k">Stability</span><span class="v">76%</span></div>
+        <div class="spec-row"><span class="k">Style exaggeration</span><span class="v">35%</span></div>
+        <div class="spec-row"><span class="k">Interruption sensitivity</span><span class="v">attiva</span></div>
+        <div class="spec-row"><span class="k">Voce</span><span class="v">timbro IT caldo</span></div>
       </div>
     </div>
   </section>
 
   <section class="steps-section">
     <div class="section-head">
-      <p class="eyebrow">La conoscenza di base</p>
+      <p class="eyebrow"><svg class="icon-plane" viewBox="0 0 24 24" aria-hidden="true"><path d="M21,16V14L13,9V3.5C13,2.67 12.33,2 11.5,2C10.67,2 10,2.67 10,3.5V9L2,14V16L10,13.5V19L7.5,20.5V22L11.5,21L15.5,22V20.5L13,19V13.5L21,16Z"/></svg>La conoscenza di base</p>
       <h2>Quattro tappe, un codice alla volta</h2>
       <p>Marco non elenca mai tutto insieme. Ma questa è la sequenza che tiene in testa, dal portone al Wi-Fi.</p>
     </div>
@@ -555,7 +502,7 @@
 
   <section class="demo">
     <div class="section-head">
-      <p class="eyebrow">La killer feature</p>
+      <p class="eyebrow"><svg class="icon-plane" viewBox="0 0 24 24" aria-hidden="true"><path d="M21,16V14L13,9V3.5C13,2.67 12.33,2 11.5,2C10.67,2 10,2.67 10,3.5V9L2,14V16L10,13.5V19L7.5,20.5V22L11.5,21L15.5,22V20.5L13,19V13.5L21,16Z"/></svg>La killer feature</p>
       <h2>Stessa calma, qualunque lingua arrivi al telefono</h2>
       <p>Il sistema riconosce automaticamente la lingua dell'ospite. Stesso Marco, stessa sequenza, stessa rassicurazione — in italiano o in inglese.</p>
     </div>
@@ -575,7 +522,7 @@
   </section>
 
   <section class="pitch">
-    <p class="eyebrow">Prossimo passo</p>
+    <p class="eyebrow"><svg class="icon-plane" viewBox="0 0 24 24" aria-hidden="true"><path d="M21,16V14L13,9V3.5C13,2.67 12.33,2 11.5,2C10.67,2 10,2.67 10,3.5V9L2,14V16L10,13.5V19L7.5,20.5V22L11.5,21L15.5,22V20.5L13,19V13.5L21,16Z"/></svg>Prossimo passo</p>
     <h2>Pronto per il kickoff</h2>
     <p>Il concept e il system prompt sono già pronti. Manca solo un compagno di team che sappia configurare Vapi.ai o la dashboard di ElevenLabs Conversational AI per collegare voce e logica.</p>
     <div class="line">"Ho già il concept e il prompt pronto per un assistente al check-in notturno per B&amp;B — dobbiamo solo configurare la voce e testare la logica."</div>
@@ -602,9 +549,8 @@
   sizeCanvas();
   window.addEventListener('resize', sizeCanvas);
 
-  var amber = getComputedStyle(document.documentElement).getPropertyValue('--amber').trim() || '#e8963c';
+  var accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#9b7cf0';
   var bars = 28;
-  var phase = 0;
 
   function drawBars(t){
     var rect = canvas.getBoundingClientRect();
@@ -618,7 +564,7 @@
       var bh = Math.max(3, (0.18 + Math.abs(amp)*0.82) * h);
       var x = i*(barW+gap);
       var y = (h-bh)/2;
-      ctx.fillStyle = amber;
+      ctx.fillStyle = accent;
       ctx.globalAlpha = 0.35 + Math.abs(amp)*0.65;
       ctx.fillRect(x, y, barW, bh);
     }
